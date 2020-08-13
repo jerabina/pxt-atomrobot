@@ -1,4 +1,5 @@
 //% color="#4d00b5" weight=10 icon="\uf135"
+// Robot ATOM - makecode extensions
 namespace robotAtom {
     const PCA9685_ADDRESS = 0x40;
     const MODE1 = 0x00;
@@ -33,9 +34,9 @@ namespace robotAtom {
 	}
 
 	function i2ccmd(addr: number, value: number) {
-		let buf2 = pins.createBuffer(1);
-		buf2[0] = value;
-		pins.i2cWriteBuffer(addr, buf2);
+		let buf = pins.createBuffer(1);
+		buf[0] = value;
+		pins.i2cWriteBuffer(addr, buf);
 	}
 
 	function i2cread(addr: number, reg: number) {
@@ -70,13 +71,13 @@ namespace robotAtom {
 
     function setPwm(channel: number, on: number, off: number): void {
 		if (channel < 0 || channel > 15) return;
-		let buf3 = pins.createBuffer(5);
-		buf3[0] = LED0_ON_L + 4 * channel;
-		buf3[1] = on & 0xff;
-		buf3[2] = (on >> 8) & 0xff;
-		buf3[3] = off & 0xff;
-		buf3[4] = (off >> 8) & 0xff;
-		pins.i2cWriteBuffer(PCA9685_ADDRESS, buf3);
+		let buf = pins.createBuffer(5);
+		buf[0] = LED0_ON_L + 4 * channel;
+		buf[1] = on & 0xff;
+		buf[2] = (on >> 8) & 0xff;
+		buf[3] = off & 0xff;
+		buf[4] = (off >> 8) & 0xff;
+		pins.i2cWriteBuffer(PCA9685_ADDRESS, buf);
 	}
 
     // motors function
@@ -127,8 +128,8 @@ namespace robotAtom {
 		if (!initialized) {
 			initPCA9685()
 		}
-		for (let idx2 = 1; idx2 <= 4; idx2++) {
-			stopMotor(idx2);
+		for (let idx = 1; idx <= 4; idx++) {
+			stopMotor(idx);
 		}
 	}
 
