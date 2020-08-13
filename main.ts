@@ -26,7 +26,7 @@ namespace robotAtom {
 
     let initialized = false;
     let neoStrip: neopixel.Strip;
-
+    
     function i2cwrite(addr: number, reg: number, value: number) {
 		let buf = pins.createBuffer(2);
 		buf[0] = reg;
@@ -90,7 +90,6 @@ namespace robotAtom {
         if (!neoStrip) {
             neoStrip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
         }
-
         return neoStrip;
     }
 

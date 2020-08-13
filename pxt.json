@@ -5,7 +5,8 @@
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "neopixel": "github:kittenbot/pxt-neopixel#v0.6.15"
+        "neopixel": "github:kittenbot/pxt-neopixel",
+        "ultrasonic": "github:1010Technologies/pxt-makerbit-ultrasonic"
     },
     "files": [
         "main.ts",
