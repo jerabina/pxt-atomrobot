@@ -1,4 +1,4 @@
-### Robot ATOM ###
+### Robot ATOM - makecode extensions ###
 
 > Open this page at [https://jerabina.github.io/pxt-atomrobot/](https://jerabina.github.io/pxt-atomrobot/)
 
@@ -10,14 +10,6 @@ This repository can be added as an **extension** in MakeCode.
 * click on **New Project**
 * click on **Extensions** under the gearwheel menu
 * search for **https://github.com/jerabina/pxt-atomrobot** and import
-
-## Edit this project ![Odznak stavu sestavení](https://github.com/jerabina/pxt-atomrobot/workflows/MakeCode/badge.svg)
-
-To edit this repository in MakeCode.
-
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/jerabina/pxt-atomrobot** and click import
 
 ## Náhled bloků
 
