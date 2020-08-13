@@ -1,9 +1,11 @@
 {
-    "name": "pxt-robotatom",
-    "description": "Robot ATOM - makecode extensions",
+    "name": "robotatom",
+    "description": "Extensions for Robot ATOM",
+    "license": "MIT",
     "dependencies": {
         "core": "*",
-        "radio": "*"
+        "radio": "*",
+        "neopixel": "github:kittenbot/pxt-neopixel#v0.6.15"
     },
     "files": [
         "main.ts",

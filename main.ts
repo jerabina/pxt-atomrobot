@@ -25,6 +25,7 @@ namespace robotAtom {
     }
 
     let initialized = false;
+    let neoStrip: neopixel.Strip;
 
     function i2cwrite(addr: number, reg: number, value: number) {
 		let buf = pins.createBuffer(2);
@@ -79,6 +80,20 @@ namespace robotAtom {
 		buf[4] = (off >> 8) & 0xff;
 		pins.i2cWriteBuffer(PCA9685_ADDRESS, buf);
 	}
+
+    /**
+     * Init RGB pixels mounted on robotbit
+     */
+    //% blockId="robotbit_rgb" block="RGB"
+    //% weight=5
+    export function rgb(): neopixel.Strip {
+        if (!neoStrip) {
+            neoStrip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
+        }
+
+        return neoStrip;
+    }
+
 
     // motors function
     function stopMotor(index: number) {
@@ -169,5 +184,7 @@ namespace robotAtom {
         let value = v_us * 4096 / 20000
         setPwm(index + 7, 0, value)
     }
+
+
 
 }
