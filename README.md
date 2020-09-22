@@ -1,6 +1,5 @@
 ### Robot ATOM - makecode extensions ###
 
-![robot linefollower](.images/atom-robot_400x300.jpg)
 
 ## Use as Extension
 
