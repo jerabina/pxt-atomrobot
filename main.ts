@@ -157,14 +157,13 @@ namespace robotAtom {
 	 * @param motor2 Second Motor; eg: M2A, M2B
 	 * @param speed2 [-255-255] speed of motor; eg: 150, -150
 	*/
-	//% blockId=robotAtom_motor_dual block="Motor|%motor1|speed %speed1|%motor2|speed %speed2"
+	//% blockId=robotAtom_motor_dual
+    //% block="Motor|%motor1|speed %speed1|%motor2|speed %speed2"
     //% inlineInputMode=inline
 	//% weight=84
 	//% speed1.min=-255 speed1.max=255
-    //% speed1.shadow="speedPicker"
-	//% speed2.min=-255 speed2.max=255
-    //% speed2.shadow="speedPicker"
-	//% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% speed2.min=-255 speed2.max=255
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
 	export function MotorRunDual(motor1: Motors, speed1: number, motor2: Motors, speed2: number): void {
 		MotorRun(motor1, speed1);
 		MotorRun(motor2, speed2);
