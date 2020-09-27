@@ -64,8 +64,6 @@ namespace robotAtom {
 		prescaleval -= 1;
         let prescale = Math.floor(prescaleval + 0.5);
 
-        serial.writeNumber(prescale);
-
 		let oldmode = i2cread(PCA9685_ADDRESS, MODE1);
 		let newmode = (oldmode & 0x7F) | 0x10;
 		i2cwrite(PCA9685_ADDRESS, MODE1, newmode);
@@ -106,7 +104,7 @@ namespace robotAtom {
 	}
 
     //% blockId=robotAtom_motor_run block="Motor|%index|speed %speed"
-	//% weight=85
+	//% weight=45
 	//% speed.min=-255 speed.max=255
 	//% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
 	export function MotorRun(index: Motors, speed: number): void {
