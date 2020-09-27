@@ -48,7 +48,7 @@ namespace robotAtom {
 
 	function initPCA9685(): void {
 		i2cwrite(PCA9685_ADDRESS, MODE1, 0x00);
-		setFreq(50);
+		setFreq(120);
 		for (let idx = 0; idx < 16; idx++) {
 			setPwm(idx, 0, 0);
 		}
