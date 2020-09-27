@@ -170,6 +170,25 @@ namespace robotAtom {
 	}
 
 
+
+    /**
+	 * Execute motor M1A and M2B at the same time
+	 * @param speed1 [-255-255] speed of motor; eg: 150, -150
+	 * @param speed2 [-255-255] speed of motor; eg: 150, -150
+	*/
+	//% blockId=robotAtom_atomStyle
+    //% block="Motor speed %speed1|speed %speed2"
+    //% inlineInputMode=inline
+	//% weight=84
+	//% speed1.min=-255 speed1.max=255
+    //% speed2.min=-255 speed2.max=255
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function MotorRunAtomStyle(speed1: number, speed2: number): void {
+		MotorRun(Motors.M1A, speed1);
+		MotorRun(Motors.M2B, speed2);
+	}
+
+
     /**
      * Servo Execute
      * @param index Servo Channel; eg: S1
