@@ -161,7 +161,9 @@ namespace robotAtom {
     //% inlineInputMode=inline
 	//% weight=84
 	//% speed1.min=-255 speed1.max=255
+    //% speed1.shadow="speedPicker"
 	//% speed2.min=-255 speed2.max=255
+    //% speed2.shadow="speedPicker"
 	//% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
 	export function MotorRunDual(motor1: Motors, speed1: number, motor2: Motors, speed2: number): void {
 		MotorRun(motor1, speed1);
