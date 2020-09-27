@@ -56,11 +56,14 @@ namespace robotAtom {
 	}
 
     function setFreq(freq: number): void {
+        freq *= 0.9; // Correct for overshoot in the frequency setting (see issue #11).
+
 		let prescaleval = 25000000;
 		prescaleval /= 4096;
 		prescaleval /= freq;
 		prescaleval -= 1;
-		let prescale = prescaleval;
+        let prescale = Math.floor(prescaleval + 0.5);
+
 		let oldmode = i2cread(PCA9685_ADDRESS, MODE1);
 		let newmode = (oldmode & 0x7F) | 0x10;
 		i2cwrite(PCA9685_ADDRESS, MODE1, newmode);
