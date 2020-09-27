@@ -158,7 +158,7 @@ namespace robotAtom {
 	 * @param speed2 [-255-255] speed of motor; eg: 150, -150
 	*/
 	//% blockId=robotAtom_motor_dual
-    //% block="Motor %motor1|speed %speed1|Motor %motor2|speed %speed2"
+    //% block="Motor A %motor1|speed %speed1|B %motor2|speed %speed2"
     //% inlineInputMode=inline
 	//% weight=84
 	//% speed1.min=-255 speed1.max=255
