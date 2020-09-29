@@ -208,24 +208,4 @@ namespace robotAtom {
         setPwm(index + 7, 0, value)
     }
 
-
-    /**
-     * Ultrasonic sensor
-     * return distance in cm
-    */
-    //% blockId=ultrasonic block="Ultrasonic"
-    //% weight=80
-    export function Ultrasonic(): number {
-        // send pulse
-        pins.setPull(DigitalPin.P15, PinPullMode.PullNone);
-        pins.digitalWritePin(DigitalPin.P15, 0);
-        control.waitMicros(2);
-        pins.digitalWritePin(DigitalPin.P15, 1);
-        control.waitMicros(10);
-        pins.digitalWritePin(DigitalPin.P15, 0);
-        // read pulse
-        let d = pins.pulseIn(DigitalPin.P14, PulseValue.High, 11600);
-        return d / 58;
-    }
-
 }
