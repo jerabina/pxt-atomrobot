@@ -5,6 +5,10 @@ namespace robotAtom {
     const MODE1 = 0x00;
     const PRESCALE = 0xFE;
     const LED0_ON_L = 0x06;
+    const PIN_ENC_LEFT = pins.P12;
+    const PIN_ENC_RIGHT = pins.P13;
+    const PIN_UTRS_ECHO = pins.P14;
+    const PIN_UTRS_TRIG = pins.P15;
 
     export enum Servos {
         S1 = 0x01,

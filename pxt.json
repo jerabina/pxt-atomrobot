@@ -6,7 +6,8 @@
         "core": "*",
         "radio": "*",
         "neopixel": "github:kittenbot/pxt-neopixel",
-        "ultrasonic": "github:1010Technologies/pxt-makerbit-ultrasonic"
+        "ultrasonic": "github:1010Technologies/pxt-makerbit-ultrasonic",
+        "microphone": "*"
     },
     "files": [
         "main.ts",
