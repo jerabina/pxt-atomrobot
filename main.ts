@@ -30,6 +30,9 @@ namespace robotAtom {
 
     let initialized = false;
     let neoStrip: neopixel.Strip;
+
+    let rightMotorBias = 0;
+    let leftMotorBias = 0;
     
     function i2cwrite(addr: number, reg: number, value: number) {
 		let buf = pins.createBuffer(2);
@@ -106,6 +109,31 @@ namespace robotAtom {
 		setPwm((index - 1) * 2, 0, 0);
 		setPwm((index - 1) * 2 + 1, 0, 0);
 	}
+
+
+
+    /**
+     * To help the :MOVE motor drive in a straight line you can bias the motors.
+     * @param balance number between 0 and 10 to help balance the motor speed
+     */
+    //% subcategory=Motors
+    //% group="Setup"
+    //% blockId=kitronik_move_motor_motor_balance
+    //% weight=85 blockGap=8
+    //% block="bias to %direction by %balance"
+    //% balance.min=0 balance.max=10
+    function motorBalance(direction: string, balance: number): void {
+        leftMotorBias = 0;
+        rightMotorBias = 0;
+        switch (direction) {
+            case 'left':
+                leftMotorBias = Math.round(balance*1.75);
+            break
+            case 'right':
+                rightMotorBias = Math.round(balance*1.75);
+        }
+    }
+
 
     //% blockId=robotAtom_motor_run block="Motor|%index|speed %speed"
 	//% weight=85
