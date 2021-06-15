@@ -27,6 +27,10 @@ namespace robotAtom {
         M2A = 0x3,
         M2B = 0x4
     }
+    let MotorsBiasM1A = 0;
+    let MotorsBiasM1B = 0;
+    let MotorsBiasM2A = 0;
+    let MotorsBiasM2B = 0;
 
     let initialized = false;
     let neoStrip: neopixel.Strip;
@@ -118,17 +122,22 @@ namespace robotAtom {
      */
     //% blockId=robotAtom_motor_balance
     //% weight=85 blockGap=8
-    //% block="bias to %direction by %balance"
+    //% block="motor bias to %motor by %balance"
     //% balance.min=0 balance.max=10
-    export function motorBalance(direction: string, balance: number): void {
-        leftMotorBias = 0;
-        rightMotorBias = 0;
-        switch (direction) {
-            case 'left':
-                leftMotorBias = Math.round(balance*1.75);
-            break
-            case 'right':
-                rightMotorBias = Math.round(balance*1.75);
+    export function motorBalance(motor: Motors, balance: number): void {
+        switch (motor) {
+            case Motors.M1A:
+                MotorsBiasM1A = Math.round(balance * 1.75);
+                break;
+            case Motors.M1B:
+                MotorsBiasM1B = Math.round(balance * 1.75);
+                break;
+            case Motors.M2A:
+                MotorsBiasM2A = Math.round(balance * 1.75);
+                break;
+            case Motors.M2B:
+                MotorsBiasM2B = Math.round(balance * 1.75);
+                break;
         }
     }
 
