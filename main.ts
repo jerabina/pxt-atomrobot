@@ -116,9 +116,7 @@ namespace robotAtom {
      * To help the :MOVE motor drive in a straight line you can bias the motors.
      * @param balance number between 0 and 10 to help balance the motor speed
      */
-    //% subcategory=Motors
-    //% group="Setup"
-    //% blockId=kitronik_move_motor_motor_balance
+    //% blockId=robotAtom_motor_balance
     //% weight=85 blockGap=8
     //% block="bias to %direction by %balance"
     //% balance.min=0 balance.max=10
