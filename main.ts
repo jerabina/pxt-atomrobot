@@ -120,7 +120,7 @@ namespace robotAtom {
     //% weight=85 blockGap=8
     //% block="bias to %direction by %balance"
     //% balance.min=0 balance.max=10
-    function motorBalance(direction: string, balance: number): void {
+    export function motorBalance(direction: string, balance: number): void {
         leftMotorBias = 0;
         rightMotorBias = 0;
         switch (direction) {
