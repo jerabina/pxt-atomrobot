@@ -5,9 +5,9 @@
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "neopixel": "github:kittenbot/pxt-neopixel",
-        "ultrasonic": "github:1010Technologies/pxt-makerbit-ultrasonic",
-        "microphone": "*"
+        "neopixel": "github:kittenbot/pxt-neopixel#v0.6.15",
+        "microphone": "*",
+        "MakerBit-Ultrasonic": "github:1010technologies/pxt-makerbit-ultrasonic#v1.0.8"
     },
     "files": [
         "main.ts",
@@ -16,6 +16,10 @@
     "testFiles": [
         "test.ts"
     ],
+    "targetVersions": {
+        "target": "4.0.17",
+        "targetId": "microbit"
+    },
     "supportedTargets": [
         "microbit"
     ],

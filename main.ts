@@ -1,5 +1,6 @@
-//% color="#4d00b5" weight=10 icon="\uf135"
 // Robot ATOM - makecode extensions
+//% color=#4d00b5 weight=10 icon="\uf135" block="RobotATOM"
+//% category="Robot ATOM"
 namespace robotAtom {
     const PCA9685_ADDRESS = 0x40;
     const MODE1 = 0x00;
