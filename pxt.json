@@ -9,8 +9,9 @@
         "microphone": "*"
     },
     "files": [
-        "main.ts",
-        "README.md"
+        "README.md",
+        "motors.ts",
+        "VL53L0X.ts"
     ],
     "testFiles": [
         "test.ts"
