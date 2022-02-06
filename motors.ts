@@ -179,8 +179,8 @@ namespace robotAtom {
     //% block="Motor speed |left %speedLeft|right %speedRight"
     //% inlineInputMode=inline
     //% weight=84
-    //% speedLeft.min=-255 speed1.max=255
-    //% speedRight.min=-255 speed2.max=255
+    //% speedLeft.min=-255 speedLeft.max=255
+    //% speedRight.min=-255 speedRight.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function MotorRunBoth(speedLeft: number, speedRight: number): void {
         MotorRun(Motors.left, speedLeft);
