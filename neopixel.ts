@@ -49,7 +49,6 @@ namespace robotAtom {
     const NEOPIXEL_PIN = DigitalPin.P16
     const NEOPIXEL_LEDS = 4;
 
-    //% shim=neopixel_sendBuffer.asm
     function sendBuffer(buf: Buffer, pin: DigitalPin) {
     }
 
