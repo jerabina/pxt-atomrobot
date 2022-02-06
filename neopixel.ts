@@ -338,13 +338,13 @@ namespace robotAtom {
      * @param pin the pin where the neopixel is connected.
      * @param numleds number of leds in the strip, eg: 24,30,60,64
      */
-    //% blockId="neopixel_create" block="NeoPixel create %mode"
+    //% blockId="neopixel_initNeopixel" block="NeoPixel init"
     //% subcategory="Neopixel"
     //% weight=90 blockGap=8
     //% parts="neopixel"
     //% trackArgs=0,2
     //% blockSetVariable=strip
-    export function create(): Strip {
+    export function initNeopixel(): Strip {
         let mode = NeoPixelMode.RGB
         let pin = NEOPIXEL_PIN
         let numleds = NEOPIXEL_LEDS;
