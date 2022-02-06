@@ -163,6 +163,12 @@ namespace robotAtom {
         stopMotor(Motors.right);
     }
 
+//% blockId=robotAtom_motor_run block="Motor|%index|speed %speed"
+    //% subcategory="Motors"
+    //% weight=85
+    //% speed.min=-255 speed.max=255
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+
     /**
      * Execute two motors at the same time
      * @param speedLeft [-255-255] speed of motor; eg: 150, -150
@@ -170,7 +176,7 @@ namespace robotAtom {
     */
     //% blockId=robotAtom_MotorRunBoth
     //% subcategory="Motors"
-    //% block="Motor speed left %speedLeft|right %speedRight"
+    //% block="Motor speed |left %speedLeft|right %speedRight"
     //% inlineInputMode=inline
     //% weight=84
     //% speedLeft.min=-255 speed1.max=255
