@@ -1,5 +1,11 @@
 // Functions to operate NeoPixel strips.
 
+enum NeoPixelLed {
+    LED0 = 0,
+    LED1 = 1,
+    LED2 = 2,
+    LED3 = 3,
+}
 
 enum NeoPixelColors {
     //% block=red
@@ -187,7 +193,7 @@ namespace robotAtom {
         //% subcategory="Neopixel"
         //% blockGap=8
         //% weight=80
-        setPixelColor(pixeloffset: number, rgb: number): void {
+        setPixelColor(pixeloffset: NeoPixelLed, rgb: number): void {
             this.setPixelRGB(pixeloffset >> 0, rgb >> 0);
         }
 
