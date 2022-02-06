@@ -468,7 +468,7 @@ namespace robotAtom {
     //% trackArgs=0,2
     //% blockSetVariable=strip
     export function create(): Strip {
-        let mode = NeoPixelMode.RGB_RGB
+        let mode = NeoPixelMode.RGB
         let pin = NEOPIXEL_PIN
         let numleds = NEOPIXEL_LEDS;
 
