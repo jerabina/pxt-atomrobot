@@ -22,20 +22,13 @@ namespace robotAtom {
     }
 
     export enum Motors {
-        M1A = 0x1,
-        M1B = 0x2,
-        M2A = 0x3,
-        M2B = 0x4
+        right = 0x1, // right motor
+        left = 0x4  // left motor
     }
-    let MotorsBiasM1A = 0;
-    let MotorsBiasM1B = 0;
-    let MotorsBiasM2A = 0;
-    let MotorsBiasM2B = 0;
+    let motorsBiasRight = 0;
+    let motorsBiasLeft = 0;
 
     let initialized = false;
-
-    let rightMotorBias = 0;
-    let leftMotorBias = 0;
 
     function i2cwrite(addr: number, reg: number, value: number) {
         let buf = pins.createBuffer(2);
@@ -113,17 +106,11 @@ namespace robotAtom {
     //% balance.min=0 balance.max=10
     export function motorBalance(motor: Motors, balance: number): void {
         switch (motor) {
-            case Motors.M1A:
-                MotorsBiasM1A = Math.round(balance * 1.75);
+            case Motors.right:
+                motorsBiasRight = Math.round(balance * 1.75);
                 break;
-            case Motors.M1B:
-                MotorsBiasM1B = Math.round(balance * 1.75);
-                break;
-            case Motors.M2A:
-                MotorsBiasM2A = Math.round(balance * 1.75);
-                break;
-            case Motors.M2B:
-                MotorsBiasM2B = Math.round(balance * 1.75);
+            case Motors.left:
+                motorsBiasLeft = Math.round(balance * 1.75);
                 break;
         }
     }
@@ -172,47 +159,26 @@ namespace robotAtom {
         if (!initialized) {
             initPCA9685()
         }
-        for (let idx = 1; idx <= 4; idx++) {
-            stopMotor(idx);
-        }
+        stopMotor(Motors.left);
+        stopMotor(Motors.right);
     }
 
     /**
      * Execute two motors at the same time
-     * @param motor1 First Motor; eg: M1A, M1B
-     * @param speed1 [-255-255] speed of motor; eg: 150, -150
-     * @param motor2 Second Motor; eg: M2A, M2B
-     * @param speed2 [-255-255] speed of motor; eg: 150, -150
+     * @param speedLeft [-255-255] speed of motor; eg: 150, -150
+     * @param speedRight [-255-255] speed of motor; eg: 150, -150
     */
-    //% blockId=robotAtom_motor_dual
+    //% blockId=robotAtom_MotorRunBoth
     //% subcategory="Motors"
-    //% block="Motor A %motor1|speed %speed1|B %motor2|speed %speed2"
+    //% block="Motor speed left %speedLeft|right %speedRight"
     //% inlineInputMode=inline
     //% weight=84
-    //% speed1.min=-255 speed1.max=255
-    //% speed2.min=-255 speed2.max=255
+    //% speedLeft.min=-255 speed1.max=255
+    //% speedRight.min=-255 speed2.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function MotorRunDual(motor1: Motors, speed1: number, motor2: Motors, speed2: number): void {
-        MotorRun(motor1, speed1);
-        MotorRun(motor2, speed2);
-    }
-
-    /**
-     * Execute motor M1A and M2B at the same time
-     * @param speed1 [-255-255] speed of motor; eg: 150, -150
-     * @param speed2 [-255-255] speed of motor; eg: 150, -150
-    */
-    //% blockId=robotAtom_atomStyle
-    //% subcategory="Motors"
-    //% block="Motor speed %speed1|speed %speed2"
-    //% inlineInputMode=inline
-    //% weight=84
-    //% speed1.min=-255 speed1.max=255
-    //% speed2.min=-255 speed2.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function MotorRunAtomStyle(speed1: number, speed2: number): void {
-        MotorRun(Motors.M1A, speed1);
-        MotorRun(Motors.M2B, speed2);
+    export function MotorRunBoth(speedLeft: number, speedRight: number): void {
+        MotorRun(Motors.left, speedLeft);
+        MotorRun(Motors.right, speedRight);
     }
 
     /**
