@@ -62,12 +62,13 @@ namespace robotAtom {
             data &= ~mask
         writeReg(register, data)
     }
+    
     /**
-     * VL53L0X Initialize
+     * Initialize VL53L0X
      */
-    //% blockId="VL53L0X_INITIALIZE" block="init vl53l0x"
+    //% blockId="VL53L0X_init" block="init vl53l0x"
     //% subcategory="VL53L0X"
-    export function init(): void {
+    export function initVL53L0X(): void {
         let r1 = readReg(0xc0)
         let r2 = readReg(0xc1)
         let r3 = readReg(0xc2)
@@ -334,11 +335,11 @@ namespace robotAtom {
     }
 
     /**
-     * Read Distance
+     * Read VL53L0X Distance
      */
-    //% blockId="VL53L0X_DISTANCE" block="distance"
+    //% blockId="robotAtom_VL53L0X_distance" block="distance"
     //% subcategory="VL53L0X"
-    export function readSingleDistance(): number {
+    export function readDistance(): number {
         let timeout = 0
         if (!started) {
             writeReg(0x80, 0x01)
@@ -368,14 +369,5 @@ namespace robotAtom {
         let value = readReg16(RESULT_RANGE_STATUS + 10)
         writeReg(INTERRUPT_CLEAR, 0x01)
         return value
-    }
-    //% blockId="STRING_DISTANCE" block="s_distance"
-    //% subcategory="VL53L0X"
-    export function stringDistance(): string {
-        let d = readSingleDistance()
-        let d1 = Math.floor(d / 10)
-        let d2 = Math.floor(d - (d1 * 10))
-        let s = `${d1}` + '.' + `${d2}` + " cm "
-        return s
     }
 }
