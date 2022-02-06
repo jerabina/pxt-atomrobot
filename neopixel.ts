@@ -1,13 +1,9 @@
 // Functions to operate NeoPixel strips.
 
 enum NeoPixelLed {
-    //% block="LED 0"
     LED0 = 0,
-    //% block="LED 1"
     LED1 = 1,
-    //% block="LED 2"
     LED2 = 2,
-    //% block="LED 3"
     LED3 = 3,
 }
 
