@@ -14,14 +14,14 @@ enum NeoPixelColors {
     Green = 0x00FF00,
     //% block=blue
     Blue = 0x0000FF,
+    //% block=yellow
+    Yellow = 0xFFFF00,
     //% block=white
     White = 0xFFFFFF,
     //% block=black
     Black = 0x000000,
     //% block=orange
-    Orange = 0xFF6C00,
-    //% block=yellow
-    Yellow = 0xFFFF00,
+    Orange = 0xFFA500,
     //% block=indigo
     Indigo = 0x4b0082,
     //% block=violet
@@ -49,6 +49,7 @@ namespace robotAtom {
     const NEOPIXEL_PIN = DigitalPin.P16
     const NEOPIXEL_LEDS = 4;
 
+    //% shim=sendBufferAsm
     function sendBuffer(buf: Buffer, pin: DigitalPin) {
     }
 
@@ -77,6 +78,7 @@ namespace robotAtom {
             this.setAllRGB(rgb);
             this.show();
         }
+     
 
         /**
          * Set LED to a given color (range 0-255 for r, g, b). 
@@ -88,8 +90,23 @@ namespace robotAtom {
         //% subcategory="Neopixel"
         //% blockGap=8
         //% weight=80
-        setPixelColor(pixeloffset: NeoPixelLed, rgb: number): void {
+        setPixelColor(pixeloffset: number, rgb: number): void {
             this.setPixelRGB(pixeloffset >> 0, rgb >> 0);
+        }
+
+        /**
+         * For NeoPixels with RGB+W LEDs, set the white LED brightness. This only works for RGB+W NeoPixels.
+         * @param pixeloffset position of the LED in the strip
+         * @param white brightness of the white LED
+         */
+        //% blockId="neopixel_set_pixel_white" block="%strip|set pixel white LED at %pixeloffset|to %white" 
+        //% subcategory="Neopixel"
+        //% blockGap=8
+        //% weight=80
+        setPixelWhiteLED(pixeloffset: number, white: number): void {
+            if (this._mode === NeoPixelMode.RGBW) {
+                this.setPixelW(pixeloffset >> 0, white >> 0);
+            }
         }
 
         /**
@@ -135,87 +152,6 @@ namespace robotAtom {
         //% weight=59
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
-        }
-
-        /**
-         * Apply brightness to current colors using a quadratic easing function.
-         **/
-        //% blockId="neopixel_each_brightness" block="%strip|ease brightness" blockGap=8
-        //% subcategory="Neopixel"
-        //% weight=58
-        easeBrightness(): void {
-            const stride = this._mode === NeoPixelMode.RGBW ? 4 : 3;
-            const br = this.brightness;
-            const buf = this.buf;
-            const end = this.start + this._length;
-            const mid = Math.idiv(this._length, 2);
-            for (let i = this.start; i < end; ++i) {
-                const k = i - this.start;
-                const ledoffset = i * stride;
-                const br = k > mid
-                    ? Math.idiv(255 * (this._length - 1 - k) * (this._length - 1 - k), (mid * mid))
-                    : Math.idiv(255 * k * k, (mid * mid));
-                serial.writeLine(k + ":" + br);
-                const r = (buf[ledoffset + 0] * br) >> 8; buf[ledoffset + 0] = r;
-                const g = (buf[ledoffset + 1] * br) >> 8; buf[ledoffset + 1] = g;
-                const b = (buf[ledoffset + 2] * br) >> 8; buf[ledoffset + 2] = b;
-                if (stride == 4) {
-                    const w = (buf[ledoffset + 3] * br) >> 8; buf[ledoffset + 3] = w;
-                }
-            }
-        }
-
-        /** 
-         * Create a range of LEDs.
-         * @param start offset in the LED strip to start the range
-         * @param length number of LEDs in the range. eg: 4
-         */
-        //% weight=89
-        //% blockId="neopixel_range" block="%strip|range from %start|with %length|leds"
-        //% subcategory="Neopixel"
-        //% parts="neopixel"
-        //% blockSetVariable=range
-        range(start: number, length: number): Strip {
-            start = start >> 0;
-            length = length >> 0;
-            let strip = new Strip();
-            strip.buf = this.buf;
-            strip.pin = this.pin;
-            strip.brightness = this.brightness;
-            strip.start = this.start + Math.clamp(0, this._length - 1, start);
-            strip._length = Math.clamp(0, this._length - (strip.start - this.start), length);
-            strip._mode = this._mode;
-            return strip;
-        }
-
-        /**
-         * Shift LEDs forward and clear with zeros.
-         * You need to call ``show`` to make the changes visible.
-         * @param offset number of pixels to shift forward, eg: 1
-         */
-        //% blockId="neopixel_shift" block="%strip|shift pixels by %offset" blockGap=8
-        //% subcategory="Neopixel"
-        //% weight=40
-        //% parts="neopixel"
-        shift(offset: number = 1): void {
-            offset = offset >> 0;
-            const stride = this._mode === NeoPixelMode.RGBW ? 4 : 3;
-            this.buf.shift(-offset * stride, this.start * stride, this._length * stride)
-        }
-
-        /**
-         * Rotate LEDs forward.
-         * You need to call ``show`` to make the changes visible.
-         * @param offset number of pixels to rotate forward, eg: 1
-         */
-        //% blockId="neopixel_rotate" block="%strip|rotate pixels by %offset" blockGap=8
-        //% subcategory="Neopixel"
-        //% weight=39
-        //% parts="neopixel"
-        rotate(offset: number = 1): void {
-            offset = offset >> 0;
-            const stride = this._mode === NeoPixelMode.RGBW ? 4 : 3;
-            this.buf.rotate(-offset * stride, this.start * stride, this._length * stride)
         }
 
         /**
@@ -337,12 +273,13 @@ namespace robotAtom {
      * @param pin the pin where the neopixel is connected.
      * @param numleds number of leds in the strip, eg: 24,30,60,64
      */
-    //% blockId="neopixel_initNeopixel" block="NeoPixel init"
+    //% blockId="neopixel_init" block="Neopixel init"
     //% subcategory="Neopixel"
     //% weight=90 blockGap=8
     //% parts="neopixel"
     //% trackArgs=0,2
     //% blockSetVariable=strip
+    //export function create(pin: DigitalPin, numleds: number, mode: NeoPixelMode): Strip {
     export function initNeopixel(): Strip {
         let mode = NeoPixelMode.RGB
         let pin = NEOPIXEL_PIN
@@ -396,5 +333,55 @@ namespace robotAtom {
     function unpackB(rgb: number): number {
         let b = (rgb) & 0xFF;
         return b;
+    }
+
+    /**
+     * Converts a hue saturation luminosity value into a RGB color
+     * @param h hue from 0 to 360
+     * @param s saturation from 0 to 99
+     * @param l luminosity from 0 to 99
+     */
+    //% blockId=neopixelHSL block="hue %h|saturation %s|luminosity %l"
+    //% subcategory="Neopixel"
+    export function hsl(h: number, s: number, l: number): number {
+        h = Math.round(h);
+        s = Math.round(s);
+        l = Math.round(l);
+
+        h = h % 360;
+        s = Math.clamp(0, 99, s);
+        l = Math.clamp(0, 99, l);
+        let c = Math.idiv((((100 - Math.abs(2 * l - 100)) * s) << 8), 10000); //chroma, [0,255]
+        let h1 = Math.idiv(h, 60);//[0,6]
+        let h2 = Math.idiv((h - h1 * 60) * 256, 60);//[0,255]
+        let temp = Math.abs((((h1 % 2) << 8) + h2) - 256);
+        let x = (c * (256 - (temp))) >> 8;//[0,255], second largest component of this color
+        let r$: number;
+        let g$: number;
+        let b$: number;
+        if (h1 == 0) {
+            r$ = c; g$ = x; b$ = 0;
+        } else if (h1 == 1) {
+            r$ = x; g$ = c; b$ = 0;
+        } else if (h1 == 2) {
+            r$ = 0; g$ = c; b$ = x;
+        } else if (h1 == 3) {
+            r$ = 0; g$ = x; b$ = c;
+        } else if (h1 == 4) {
+            r$ = x; g$ = 0; b$ = c;
+        } else if (h1 == 5) {
+            r$ = c; g$ = 0; b$ = x;
+        }
+        let m = Math.idiv((Math.idiv((l * 2 << 8), 100) - c), 2);
+        let r = r$ + m;
+        let g = g$ + m;
+        let b = b$ + m;
+        return packRGB(r, g, b);
+    }
+
+    export enum HueInterpolationDirection {
+        Clockwise,
+        CounterClockwise,
+        Shortest
     }
 }
