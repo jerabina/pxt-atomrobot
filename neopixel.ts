@@ -398,10 +398,4 @@ namespace robotAtom {
         let b = (rgb) & 0xFF;
         return b;
     }
-
-    export enum HueInterpolationDirection {
-        Clockwise,
-        CounterClockwise,
-        Shortest
-    }
 }
