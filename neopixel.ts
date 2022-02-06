@@ -42,7 +42,7 @@ enum NeoPixelMode {
     RGB_RGB = 2
 }
 
-//% color="#4d00b5" icon="\uf135" block="Robot ATOM"
+//% color="#4d00b5" icon="\uf2db" block="Robot ATOM"
 //% category="Robot ATOM"
 namespace robotAtom {
 

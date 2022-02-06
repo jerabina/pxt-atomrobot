@@ -1,4 +1,4 @@
-//% color="#4d00b5" icon="\uf135" block="Robot ATOM"
+//% color="#4d00b5" icon="\uf2db" block="Robot ATOM"
 //% category="Robot ATOM"
 namespace robotAtom {
     const PCA9685_ADDRESS = 0x40;
@@ -96,7 +96,8 @@ namespace robotAtom {
 
 
     /**
-     * To help the :MOVE motor drive in a straight line you can bias the motors.
+     * To help the motor drive in a straight line you can bias the motors.
+     * @param motor select motor
      * @param balance number between 0 and 10 to help balance the motor speed
      */
     //% blockId=robotAtom_motor_balance
@@ -115,6 +116,11 @@ namespace robotAtom {
         }
     }
 
+    /**
+     * Run one motor
+     * @param index select motor
+     * @param speed enter speed -255 to 255
+     */
     //% blockId=robotAtom_motor_run block="Motor|%index|speed %speed"
     //% subcategory="Motors"
     //% weight=85
@@ -144,6 +150,10 @@ namespace robotAtom {
         }
     }
 
+    /**
+     * Stop one motor
+     * @param index select motor
+     */
     //% blockId=robotAtom_stop block="Motor Stop|%index|"
     //% subcategory="Motors"
     //% weight=80
@@ -151,6 +161,9 @@ namespace robotAtom {
         MotorRun(index, 0);
     }
 
+    /**
+     * Stop all motors
+     */
     //% blockId=robotAtom_stop_all block="Motor Stop All"
     //% subcategory="Motors"
     //% weight=79
@@ -162,13 +175,7 @@ namespace robotAtom {
         stopMotor(Motors.left);
         stopMotor(Motors.right);
     }
-
-//% blockId=robotAtom_motor_run block="Motor|%index|speed %speed"
-    //% subcategory="Motors"
-    //% weight=85
-    //% speed.min=-255 speed.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-
+    
     /**
      * Execute two motors at the same time
      * @param speedLeft [-255-255] speed of motor; eg: 150, -150

@@ -1,4 +1,4 @@
-//% color="#4d00b5" icon="\uf135" block="Robot ATOM"
+//% color="#4d00b5" icon="\uf2db" block="Robot ATOM"
 //% category="Robot ATOM"
 namespace robotAtom {
     let i2cAddr = 0x29
@@ -335,7 +335,7 @@ namespace robotAtom {
     }
 
     /**
-     * Read VL53L0X Distance
+     * Return VL53L0X distance in milimeters
      */
     //% blockId="robotAtom_VL53L0X_distance" block="distance"
     //% subcategory="VL53L0X"
