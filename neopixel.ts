@@ -46,7 +46,8 @@ enum NeoPixelMode {
 //% category="Robot ATOM"
 namespace robotAtom {
 
-
+    const NEOPIXEL_PIN = DigitalPin.P16
+    const NEOPIXEL_LEDS = 4;
 
     //% shim=sendBufferAsm
     function sendBuffer(buf: Buffer, pin: DigitalPin) {
@@ -460,13 +461,17 @@ namespace robotAtom {
      * @param pin the pin where the neopixel is connected.
      * @param numleds number of leds in the strip, eg: 24,30,60,64
      */
-    //% blockId="neopixel_create" block="NeoPixel at pin %pin|with %numleds|leds as %mode"
+    //% blockId="neopixel_create" block="NeoPixel create %mode"
     //% subcategory="Neopixel"
     //% weight=90 blockGap=8
     //% parts="neopixel"
     //% trackArgs=0,2
     //% blockSetVariable=strip
-    export function create(pin: DigitalPin, numleds: number, mode: NeoPixelMode): Strip {
+    export function create(): Strip {
+        let mode = NeoPixelMode.RGBW
+        let pin = NEOPIXEL_PIN
+        let numleds = NEOPIXEL_LEDS;
+
         let strip = new Strip();
         let stride = mode === NeoPixelMode.RGBW ? 4 : 3;
         strip.buf = pins.createBuffer(numleds * stride);
