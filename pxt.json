@@ -13,7 +13,8 @@
         "motors.ts",
         "VL53L0X.ts",
         "neopixel.ts",
-        "neopixel_sendBuffer.asm"
+        "neopixel_sendBuffer.asm",
+        "VL6180.ts"
     ],
     "testFiles": [
         "test.ts"

@@ -62,13 +62,13 @@ namespace robotAtom {
             data &= ~mask
         writeReg(register, data)
     }
-    
+
     /**
-     * Initialize VL53L0X
+     * Initialize VL6180X
      */
-    //% blockId="VL53L0X_init" block="init VL53L0X"
+    //% blockId="VL6180X_init" block="init VL6180X"
     //% subcategory="Proximity"
-    export function initVL53L0X(): void {
+    export function initVl6180x(): void {
         let r1 = readReg(0xc0)
         let r2 = readReg(0xc1)
         let r3 = readReg(0xc2)
@@ -335,11 +335,11 @@ namespace robotAtom {
     }
 
     /**
-     * Return VL53L0X distance in milimeters
+     * Return VL6180X distance in milimeters
      */
-    //% blockId="robotAtom_VL53L0X_distance" block="VL53L0X distance"
+    //% blockId="robotAtom_VL6180X_distance" block="distance VL6180X"
     //% subcategory="Proximity"
-    export function readDistance(): number {
+    export function readVl6180xDistance(): number {
         let timeout = 0
         if (!started) {
             writeReg(0x80, 0x01)
