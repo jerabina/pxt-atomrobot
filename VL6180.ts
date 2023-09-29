@@ -1,3 +1,5 @@
+
+/*
 //% color="#4d00b5" icon="\uf2db" block="Robot ATOM"
 //% category="Robot ATOM"
 namespace robotAtom {
@@ -63,9 +65,8 @@ namespace robotAtom {
         writeReg(register, data)
     }
 
-    /**
-     * Initialize VL6180X
-     */
+  
+    // Initialize VL6180X
     //% blockId="VL6180X_init" block="VL6180X init"
     //% subcategory="Proximity"
     export function initVl6180x(): void {
@@ -334,9 +335,7 @@ namespace robotAtom {
         return value
     }
 
-    /**
-     * Return VL6180X distance in milimeters
-     */
+    // Return VL6180X distance in milimeters
     //% blockId="robotAtom_VL6180X_distance" block="VL6180X distance"
     //% subcategory="Proximity"
     export function readVl6180xDistance(): number {
@@ -371,3 +370,4 @@ namespace robotAtom {
         return value
     }
 }
+*/
