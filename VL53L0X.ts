@@ -66,7 +66,7 @@ namespace robotAtom {
     /**
      * Initialize VL53L0X
      */
-    //% blockId="VL53L0X_init" block="init VL53L0X"
+    //% blockId="VL53L0X_init" block="VL53L0X init"
     //% subcategory="Proximity"
     export function initVL53L0X(): void {
         let r1 = readReg(0xc0)

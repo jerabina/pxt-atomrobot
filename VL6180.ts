@@ -66,7 +66,7 @@ namespace robotAtom {
     /**
      * Initialize VL6180X
      */
-    //% blockId="VL6180X_init" block="init VL6180X"
+    //% blockId="VL6180X_init" block="VL6180X init"
     //% subcategory="Proximity"
     export function initVl6180x(): void {
         let r1 = readReg(0xc0)
@@ -337,7 +337,7 @@ namespace robotAtom {
     /**
      * Return VL6180X distance in milimeters
      */
-    //% blockId="robotAtom_VL6180X_distance" block="distance VL6180X"
+    //% blockId="robotAtom_VL6180X_distance" block="VL6180X distance"
     //% subcategory="Proximity"
     export function readVl6180xDistance(): number {
         let timeout = 0
