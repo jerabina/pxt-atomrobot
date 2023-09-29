@@ -15,6 +15,7 @@ Harware:
         S0:S8 - servo interfaces
 
     - VL53L0X v2 address 0x29 - Time-of-Flight ranging sensor
+    - VL6180X address 0x29 - Time-of-Flight ranging sensor
 
 */
 /*
